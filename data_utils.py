@@ -48,10 +48,12 @@ def basic_tokenizer(sentence):
   words = []
   for space_separated_fragment in sentence.strip().split():
     if isinstance(space_separated_fragment, str):
-        word = str.encode(space_separated_fragment)
+        word = str.encode(space_separated_fragment)       
     else:
         word = space_separated_fragment  
-    words.extend(re.split(_WORD_SPLIT, word))
+    # words.extend(re.split(_WORD_SPLIT, word))
+    try: words.extend(re.split(_WORD_SPLIT, str.encode(space_separated_fragment))) 
+    except: words.extend(re.split(_WORD_SPLIT, space_separated_fragment))
   return [w for w in words if w]
 
 
